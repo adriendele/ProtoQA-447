@@ -14,4 +14,5 @@ python run_lm_finetuning.py \
     --per_gpu_eval_batch_size=1 \
     --num_train_epochs=1 \
     --save_total_limit=5 \
-    --gradient_accumulation_steps=8
+    --gradient_accumulation_steps=8 \
+    --no_cuda

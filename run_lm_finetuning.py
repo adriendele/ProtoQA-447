@@ -28,7 +28,7 @@ except:
 
 from tqdm import tqdm, trange
 
-from transformers import (WEIGHTS_NAME, AdamW, WarmupLinearSchedule,
+from transformers import (WEIGHTS_NAME, AdamW, get_linear_schedule_with_warmup,
                                   BertConfig, BertForMaskedLM, BertTokenizer,
                                   GPT2Config, GPT2LMHeadModel, GPT2Tokenizer,
                                   OpenAIGPTConfig, OpenAIGPTLMHeadModel, OpenAIGPTTokenizer,
@@ -205,7 +205,7 @@ def train(args, train_dataset, model, tokenizer):
         ]
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.learning_rate, eps=args.adam_epsilon)
     # scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=args.warmup_steps, num_training_steps=t_total)
-    scheduler = WarmupLinearSchedule(optimizer, warmup_steps=args.warmup_steps, t_total=t_total)
+    scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=args.warmup_steps, num_training_steps=t_total)
     if args.fp16:
         try:
             from apex import amp
@@ -251,7 +251,10 @@ def train(args, train_dataset, model, tokenizer):
             inputs = inputs.to(args.device)
             labels = labels.to(args.device)
             # pdb.set_trace()
+            print(model)
             model.train()
+            print(inputs.shape)
+            print(labels.shape)
             outputs = model(inputs, masked_lm_labels=labels) if args.mlm else model(inputs, labels=labels)
             # pdb.set_trace()
             loss = outputs[0]  # model outputs are always tuple in transformers (see doc)
