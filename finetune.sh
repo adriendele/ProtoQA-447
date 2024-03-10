@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 python run_lm_finetuning.py \
-    --output_dir=output \
+    --output_dir=./models/output \
     --model_type=gpt2 \
     --model_name_or_path=gpt2-large \
     --do_train \

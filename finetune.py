@@ -1,13 +1,5 @@
 from __future__ import absolute_import, division, print_function
-import argparse
-import glob
-import logging
 import os
-import pickle
-import random
-import re
-import shutil
-import pdb
 import numpy as np
 import torch
 from torch.utils.data import DataLoader, Dataset, SequentialSampler, RandomSampler
@@ -16,11 +8,20 @@ from tqdm import tqdm, trange
 
 from transformers import (WEIGHTS_NAME, AdamW, get_linear_schedule_with_warmup,
                   GPT2Config, GPT2LMHeadModel, GPT2Tokenizer)
+from transformers import GemmaTokenizer, GemmaForCausalLM
+from transformers import GPTNeoForCausalLM
 
-# Define the path to the training data
-train_data_path = "./data/finetune_train.txt"
+gemma_model_name = "google/gemma-2b"
+gpt_neo_model_name = "EleutherAI/gpt-neo-125m"
+gpt2_model_name = "gpt2"
 
-tokenizer = GPT2Tokenizer.from_pretrained("gpt2-large")
+train_data_path = "./data/finetune_train.redux.txt"
+
+# tokenizer = GPT2Tokenizer.from_pretrained(gpt2_model_name)
+# tokenizer = T5Tokenizer.from_pretrained(t5_model_name)
+# tokenizer = GemmaTokenizer.from_pretrained(gemma_model_name)
+tokenizer = GPT2Tokenizer.from_pretrained(gpt_neo_model_name)
+
 tokenizer.pad_token = tokenizer.eos_token
 
 class CustomDataset(Dataset):
@@ -48,30 +49,26 @@ class CustomDataset(Dataset):
     )
     return inputs
 
-# Create an instance of the custom dataset
 dataset = CustomDataset(train_data_path, tokenizer)
 
-# Define the batch size and number of training epochs
-batch_size = 4
+batch_size = 1
 num_epochs = 1
 
-# Create a data loader for training
 train_sampler = RandomSampler(dataset)
 train_dataloader = DataLoader(dataset, sampler=train_sampler, batch_size=batch_size)
 
-# Load the pre-trained GPT-2 model
-model = GPT2LMHeadModel.from_pretrained("gpt2")
+# model = GPT2LMHeadModel.from_pretrained(gpt2_model_name)
+# model = T5ForConditionalGeneration.from_pretrained(t5_model_name)
+# model = GemmaForCausalLM.from_pretrained(gemma_model_name)
+model = GPTNeoForCausalLM.from_pretrained(gpt_neo_model_name)
 
-# Set the device to GPU if available, otherwise use CPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
-# Define the optimizer and learning rate scheduler
 optimizer = AdamW(model.parameters(), lr=1e-5)
 total_steps = len(train_dataloader) * num_epochs
 scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=0, num_training_steps=total_steps)
 
-# Start the training loop
 for epoch in range(num_epochs):
   model.train()
   total_loss = 0

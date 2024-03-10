@@ -14,9 +14,8 @@ import torch
 import torch.nn.functional as F
 import numpy as np
 
-from transformers import GPT2Config, OpenAIGPTConfig, XLNetConfig, TransfoXLConfig, XLMConfig, CTRLConfig
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
+from transformers import GPT2LMHeadModel, GPT2Tokenizer, GPTNeoForCausalLM
 
 import json
 import collections
@@ -43,8 +42,8 @@ MAX_LENGTH = int(10000)  # Hardcoded max length to avoid infinite loop
 MODEL_CLASSES = {
     'gpt2': (GPT2LMHeadModel, GPT2Tokenizer),
     'allenai/macaw-3b': (AutoModelForSeq2SeqLM, AutoTokenizer),
+    'gpt-neo': (GPTNeoForCausalLM, GPT2Tokenizer)
 }
-
 
 def set_seed(args):
     np.random.seed(args.seed)
@@ -109,6 +108,9 @@ def sample_sequence(model, length, context, num_samples=1, temperature=1, top_k=
             outputs = model(**inputs)  # Note: we could also use 'past' with GPT-2/Transfo-XL/XLNet/CTRL (cached hidden-states)
             next_token_logits = outputs[0][:, -1, :] / (temperature if temperature > 0 else 1.)
 
+            # outputs = model.generate(input_ids=generated, output_scores=True, return_dict_in_generate=True).scores
+            # next_token_logits = outputs[0][:, :] / (temperature if temperature > 0 else 1.)
+
             # repetition penalty from CTRL (https://arxiv.org/abs/1909.05858)
             for i in range(num_samples):
                 for _ in set(generated[i].tolist()):
@@ -120,6 +122,7 @@ def sample_sequence(model, length, context, num_samples=1, temperature=1, top_k=
             else:
                 next_token = torch.multinomial(F.softmax(filtered_logits, dim=-1), num_samples=1)
             generated = torch.cat((generated, next_token), dim=1)
+            
     return generated
 
 def transform_question(question):
@@ -280,8 +283,8 @@ def main():
     en_stopwords = set(stopwords.words('english'))
     if args.length < 0 and model.config.max_position_embeddings > 0:
         args.length = model.config.max_position_embeddings
-    elif 0 < model.config.max_position_embeddings < args.length:
-        args.length = model.config.max_position_embeddings  # No generation bigger than model size
+    # elif 0 < model.config.max_position_embeddings < args.length:
+    #     args.length = model.config.max_position_embeddings  # No generation bigger than model size
     elif args.length < 0:
         args.length = MAX_LENGTH  # avoid infinite loop
 
@@ -323,7 +326,6 @@ def main():
             # print(text)
             nostop_text_list = [tok for tok in text.split(' ') if tok not in en_stopwords]
             nostop_text = " ".join(nostop_text_list)
-            # print(nostop_text)
             if qidx[single_question_idx] not in prediced_dev:
                 prediced_dev[qidx[single_question_idx]] = [nostop_text]
             else:
@@ -334,6 +336,7 @@ def main():
     ranked_predicted_dev = collections.defaultdict(list)
     sampled_answers = collections.defaultdict(list)
     for q in prediced_dev:
+        # counted_value = Counter(prediced_dev[q])
         counted_value = Counter([item for item in prediced_dev[q] if len(item) > 0])
         sampled_answers[q] = counted_value
         ranked_list = [pair[0] for pair in counted_value.most_common(10)]
