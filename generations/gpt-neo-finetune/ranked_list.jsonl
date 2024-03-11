@@ -1,0 +1,52 @@
+{"r1q1": ["age", "job", "money", "hair", "personality", "weight", "family", "model", "friends", "looks"]}
+{"r1q2": ["bad grades", "money", "love", "good grades", "crying", "sick", "excited", "job", "graduation", "car trouble"]}
+{"r1q3": ["clothes", "jewelry", "crown", "moses", "bible", "book", "church", "pen", "house", "leaves"]}
+{"r1q5": ["eat", "sleep", "talk", "read", "clean", "make love", "walk", "watch tv", "cook", "get dressed"]}
+{"r1q6": ["eggs", "milk", "food", "pizza", "meat", "cookies", "dairy", "sugar", "flour", "strawberry"]}
+{"r1q7": ["corn", "banana", "cherry", "tomatoes", "garlic", "peas", "chicken", "pumpkin", "chips", "french fries"]}
+{"r1q8": ["car", "jewelry", "cologne", "hair", "carpet", "wallet", "sunscreen", "food", "toys", "clothes"]}
+{"r1q9": ["football", "baseball", "golf", "hockey", "tennis", "basketball", "boxing", "swimming", "volleyball", "soccer"]}
+{"r1q10": ["car", "driveway", "cell phone", "comb", "motorcycle", "house", "gas station", "bathroom", "park", "garage"]}
+{"r1q11": ["children", "police", "toys", "school", "parents", "kids", "car", "pets", "cars", "babies"]}
+{"r1q12": ["car", "poles", "cars", "mall", "ballpark", "bicycle", "motorcycle", "baseball", "truck", "sporting event"]}
+{"r1q14": ["hair spray", "dye", "haircut", "dirt", "dancer", "hair", "brush", "hair dryer", "hairdresser", "hairbrush"]}
+{"r1q16": ["computer", "microwave", "tv", "shower", "telephone", "cable", "phone", "scissors", "pilot", "dishwasher"]}
+{"r1q17": ["computer", "clothes", "food", "shoes", "toys", "car", "panties", "water", "cell phone", "glasses"]}
+{"r1q18": ["shoes", "hat", "clothes", "socks", "underwear", "pants", "tie", "coat", "skirt", "tuxedo"]}
+{"r1q19": ["family", "love", "christmas", "food", "wedding", "church", "spouse", "gifts", "children", "labor"]}
+{"r1q20": ["food", "toys", "bills", "clothes", "car", "dishes", "shoes", "stamps", "jewelry", "cards"]}
+{"r2q3": ["pizza", "cheese", "pasta", "chicken", "french fries", "bacon", "soup", "chicken wings", "pie", "steak"]}
+{"r2q4": ["bad breath", "cold", "sick", "tired", "noise", "shoes", "hair", "gloves", "exercise", "noisy"]}
+{"r2q5": ["friendship", "kissing", "friends", "smile", "loves one", "love", "talk", "say hello", "kiss", "married"]}
+{"r2q6": ["bathroom", "kitchen", "bed", "tv", "stove", "bedroom", "dishes", "car", "roof", "laundry"]}
+{"r2q7": ["talk", "eat", "cry", "sleep", "get dressed", "kiss", "drink", "go bathroom", "play sports", "smile"]}
+{"r2q8": ["doctor", "construction", "teacher", "police officer", "cook", "police", "salesperson", "nurse", "dentist", "gardener"]}
+{"r2q9": ["much", "they're rude", "teach", "bad posture", "exercise", "bugs", "rude", "running", "seem get older", "clothes"]}
+{"r2q10": ["many toys", "money", "bad grades", "much food", "much", "bad manners", "much hair", "many teeth", "much exercise", "big"]}
+{"r2q11": ["talk", "kiss", "smile", "drink", "talk one person", "watch tv", "dance", "say hello", "spit", "friends"]}
+{"r2q12": ["bedroom", "bathroom", "car", "carpet", "microwave", "garage", "bed", "bedding", "couch", "shoes"]}
+{"r2q14": ["get job", "get married", "work", "eat", "read", "dance", "sleep", "drive", "talk", "find job"]}
+{"r2q15": ["food", "car", "money", "clothes", "toys", "jewelry", "laundry", "house", "cars", "bills"]}
+{"r2q18": ["death", "bad weather", "sick", "change", "fall asleep", "drowning", "noise", "crowded", "wedding", "married"]}
+{"r2q19": ["car", "cat", "hair", "clothes", "toy", "toys", "truck", "fire", "motorcycle", "pets"]}
+{"r2q20": ["pizza", "toys", "milk", "eggs", "flowers", "candy", "popcorn", "apple", "tv", "food"]}
+{"r2q21": ["pizza sauce", "bread", "cheese", "pizza topping", "sandwiches", "flour", "meat", "pie", "oven", "chicken"]}
+{"r2q23": ["football", "hockey", "crowded", "teams", "kick", "bad", "players", "high", "dirty", "cheer"]}
+{"r2q25": ["sick", "love", "pets", "pet", "good smell", "nice smell", "tired", "love animals", "bad smell", "nice food"]}
+{"r2q26": ["dog", "cat", "cow", "pig", "bear", "lion", "monkey", "horse", "rabbit", "lizard"]}
+{"r2q27": ["talk", "go bathroom", "kiss", "eat", "walk", "watch tv", "get dressed", "smile", "spit", "read"]}
+{"r2q30": ["bad weather", "traffic", "sick", "car trouble", "much traffic", "tired", "traffic light", "driving fast", "crowded", "traffic jam"]}
+{"r2q31": ["birds", "bird", "snake", "lion", "pig", "dog", "frog", "cat", "turtle", "cricket"]}
+{"r2q32": ["bad grades", "young", "bad manners", "much", "old", "much time", "noisy", "interested", "sick", "big"]}
+{"r2q35": ["police officer", "police", "lawyer", "construction", "politician", "doctor", "teacher", "secretary", "insurance", "spouse"]}
+{"r2q37": ["talk", "bad breath", "talking", "noise", "friends", "coughing", "kissing", "loud noise", "spouse", "watching tv"]}
+{"r2q38": ["car", "clothes", "toys", "jewelry", "food", "candy", "house", "coffee", "pet", "grocery"]}
+{"r2q39": ["walking", "run", "dancing", "dance", "jogging", "walk", "driving", "jail", "jumping jacks", "sporting event"]}
+{"r2q40": ["fire", "death", "people", "children", "drowning", "pets", "gun", "trauma", "traffic", "crowded"]}
+{"r2q42": ["car", "new flight", "change seat", "airplane", "money", "mail", "tickets", "seatbelt", "crowded seats", "clothes"]}
+{"r2q43": ["car", "cars", "truck", "shoes", "towels", "blanket", "dog", "keys", "bills", "cell phone"]}
+{"r2q44": ["hair", "house", "money", "car", "clothes", "jewelry", "food", "purse", "bathroom", "shoes"]}
+{"r2q45": ["job", "friends", "car", "doctor", "money", "house", "family", "hair", "love", "exercise"]}
+{"r2q46": ["nice food", "nice", "good food", "nice job", "noise", "good customer service", "clean", "cheers", "bad food", "smile"]}
+{"r2q47": ["car", "food", "water", "money", "computer", "cookies", "house", "socks", "bills", "wedding"]}
+{"r2q49": ["bar", "restaurant", "concert", "church", "bar/restaurant", "airport", "library", "work", "hospital", "park"]}

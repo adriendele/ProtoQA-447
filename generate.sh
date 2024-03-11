@@ -1,6 +1,6 @@
 python run_generation.py \
   --model_type=gpt-neo \
-  --model_name_or_path='./models/gpt-neo-125m' \
+  --model_name_or_path='./models/gpt-neo-finetune' \
   --length=10 \
   --num_samples=300 \
   --temperature=0.69 \

@@ -15,7 +15,7 @@ gemma_model_name = "google/gemma-2b"
 gpt_neo_model_name = "EleutherAI/gpt-neo-125m"
 gpt2_model_name = "gpt2"
 
-train_data_path = "./data/finetune_train.redux.txt"
+train_data_path = "./data/finetune_train.txt"
 
 # tokenizer = GPT2Tokenizer.from_pretrained(gpt2_model_name)
 # tokenizer = T5Tokenizer.from_pretrained(t5_model_name)
@@ -88,7 +88,7 @@ for epoch in range(num_epochs):
   print("Epoch {}: Average Loss = {:.4f}".format(epoch + 1, avg_loss))
 
 # Save the fine-tuned model
-output_dir = "./output"
+output_dir = "./models/output"
 os.makedirs(output_dir, exist_ok=True)
 model.save_pretrained(output_dir)
 tokenizer.save_pretrained(output_dir)
