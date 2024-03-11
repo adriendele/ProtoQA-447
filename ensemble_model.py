@@ -2,7 +2,7 @@ import json
 from collections import defaultdict, Counter
 
 def main():
-  with open('./generations/finetune/sample_answers.json') as f:
+  with open('./generations/gpt2-finetune/sample_answers.json') as f:
     combined_answers = json.load(f)
   with open('./generations/gpt-neo-finetune/sample_answers.json') as f:
     answers = json.load(f)
@@ -25,7 +25,6 @@ def main():
     for key in ranked_lists:
       json.dump({key:ranked_lists[key]}, f)
       f.write('\n')
-
 
 if __name__ == '__main__':
   main()

@@ -13,14 +13,14 @@ from transformers import GPTNeoForCausalLM
 
 gemma_model_name = "google/gemma-2b"
 gpt_neo_model_name = "EleutherAI/gpt-neo-125m"
-gpt2_model_name = "gpt2"
+gpt2_model_name = "gpt2-xl"
 
 train_data_path = "./data/finetune_train.txt"
 
-# tokenizer = GPT2Tokenizer.from_pretrained(gpt2_model_name)
+tokenizer = GPT2Tokenizer.from_pretrained(gpt2_model_name)
 # tokenizer = T5Tokenizer.from_pretrained(t5_model_name)
 # tokenizer = GemmaTokenizer.from_pretrained(gemma_model_name)
-tokenizer = GPT2Tokenizer.from_pretrained(gpt_neo_model_name)
+# tokenizer = GPT2Tokenizer.from_pretrained(gpt_neo_model_name)
 
 tokenizer.pad_token = tokenizer.eos_token
 
@@ -57,10 +57,10 @@ num_epochs = 1
 train_sampler = RandomSampler(dataset)
 train_dataloader = DataLoader(dataset, sampler=train_sampler, batch_size=batch_size)
 
-# model = GPT2LMHeadModel.from_pretrained(gpt2_model_name)
+model = GPT2LMHeadModel.from_pretrained(gpt2_model_name)
 # model = T5ForConditionalGeneration.from_pretrained(t5_model_name)
 # model = GemmaForCausalLM.from_pretrained(gemma_model_name)
-model = GPTNeoForCausalLM.from_pretrained(gpt_neo_model_name)
+# model = GPTNeoForCausalLM.from_pretrained(gpt_neo_model_name)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)

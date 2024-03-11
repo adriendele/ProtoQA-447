@@ -28,8 +28,6 @@ from functools import partial
 from pathlib import Path
 import numpy as np
 
-
-
 logging.basicConfig(format = '%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
                     datefmt = '%m/%d/%Y %H:%M:%S',
                     level = logging.INFO)
@@ -96,7 +94,7 @@ def top_k_top_p_filtering(logits, top_k=0, top_p=0.0, filter_value=-float('Inf')
     return logits
 
 
-def sample_sequence(model, length, context, num_samples=1, temperature=1, top_k=0, top_p=0.0, repetition_penalty=1.0,
+def sample_sequence(model, model2, length, context, num_samples=1, temperature=1, top_k=0, top_p=0.0, repetition_penalty=1.0,
                     is_xlnet=False, is_xlm_mlm=False, xlm_mask_token=None, xlm_lang=None, device='cpu'):
     context = torch.tensor(context, dtype=torch.long, device=device)
     context = context.unsqueeze(0).repeat(num_samples, 1)
@@ -107,6 +105,10 @@ def sample_sequence(model, length, context, num_samples=1, temperature=1, top_k=
             inputs = {'input_ids': generated}
             outputs = model(**inputs)  # Note: we could also use 'past' with GPT-2/Transfo-XL/XLNet/CTRL (cached hidden-states)
             next_token_logits = outputs[0][:, -1, :] / (temperature if temperature > 0 else 1.)
+
+            if model2:
+                outputs2 = model2(**inputs)
+                next_token_logits += outputs2[0][:, -1, :] / (temperature if temperature > 0 else 1.)
 
             # outputs = model.generate(input_ids=generated, output_scores=True, return_dict_in_generate=True).scores
             # next_token_logits = outputs[0][:, :] / (temperature if temperature > 0 else 1.)
@@ -279,6 +281,11 @@ def main():
     model = model_class.from_pretrained(args.model_name_or_path, cache_dir = './pre_trained_model')
     model.to(args.device)
     model.eval()
+    
+    model_class2, _ = MODEL_CLASSES['gpt2']
+    model2 = model_class2.from_pretrained('gpt2-large')
+    model2.to(args.device)
+    model2.eval()
 
     en_stopwords = set(stopwords.words('english'))
     if args.length < 0 and model.config.max_position_embeddings > 0:
@@ -303,6 +310,7 @@ def main():
         context_tokens = tokenizer.encode(raw_text, add_special_tokens=False)
         out = sample_sequence(
             model=model,
+            model2=model2,
             context=context_tokens,
             num_samples=args.num_samples,
             length=args.length,
